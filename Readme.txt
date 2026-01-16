@@ -1,4 +1,4 @@
-# How to Set Up Your Questions for the Wix Embed
+## How to Set Up Your Questions for the Wix Embed
 
 Follow these steps to make your quiz work on your Wix site:
 
