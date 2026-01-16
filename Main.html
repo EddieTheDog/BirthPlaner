@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Birth Plan Form</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+/* ===== Body & App ===== */
+body {
+  margin: 0;
+  font-family: 'Helvetica Neue', sans-serif;
+  background: #f8f8f8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2em;
+  box-sizing: border-box;
+}
+
+#app {
+  width: 100%;
+  max-width: 500px;
+  min-width: 360px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 1.5em 2em;
+  box-sizing: border-box;
+}
+
+.progress-bar {
+  height: 8px;
+  background: #e0e0e0;
+  width: calc(100% - 2em);
+  margin: 0 auto;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  background: #d4af37; /* Gold */
+  width: 0%;
+  transition: width 0.3s ease;
+  border-radius: 4px;
+}
+
+.screen {
+  position: relative;
+  padding: 2em 2.5em;
+  display: none;
+  flex-direction: column;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+.screen.active {
+  display: flex;
+}
+
+.question {
+  font-size: 1.3em;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 0.2em;
+  text-align: center;
+  user-select: text;
+}
+
+.description {
+  font-size: 0.9em;
+  color: #666;
+  margin-bottom: 1.6em;
+  line-height: 1.3em;
+  text-align: center;
+  user-select: text;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.1em;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 1.1em;
+  color: #333;
+}
+
+label span.required {
+  color: #d9534f;
+  margin-left: 6px;
+  font-weight: bold;
+  font-size: 1.2em;
+  vertical-align: middle;
+}
+
+input[type="text"],
+input[type="date"],
+select,
+textarea {
+  width: 100%;
+  padding: 0.9em 1.1em;
+  font-size: 1.1em;
+  border: 1.8px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+  font-family: inherit;
+  resize: vertical;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+select:focus,
+textarea:focus {
+  border-color: #d4af37;
+  outline: none;
+  box-shadow: 0 0 6px rgba(212, 175, 55, 0.5);
+}
+
+.buttons {
+  margin-top: 1.6em;
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  padding: 0.85em 2em;
+  font-size: 1.1em;
+  background: #d4af37;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 6px rgba(212, 175, 55, 0.6);
+}
+
+button:hover:not(:disabled) {
+  background: #a7851f;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* circular nav buttons (Back / Next) */
+.circle-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background: #d4af37;
+  color: #fff;
+  font-size: 1.4em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);
+  padding: 0;
+  min-width: 50px;
+}
+
+.circle-btn:hover:not(:disabled) {
+  background: #b9951f;
+  transform: scale(1.05);
+}
+
+.circle-btn:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.circle-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: #f0f0f0;
+  color: #aaa;
+  box-shadow: none;
+}
+
+.circle-btn.review {
+  height: 50px;
+  border-radius: 25px;
+  padding: 0 15px;
+  min-width: auto;
+  font-size: 0.95em;
+}
+
+.yes-no {
+  display: flex;
+  gap: 1.3em;
+  justify-content: center;
+  margin-top: 0.5em;
+  margin-bottom: 1.5em;
+}
+
+.yes-no button {
+  flex: 1;
+  background: #eee;
+  color: #333;
+  font-size: 1.1em;
+  padding: 0.9em 0;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  user-select: none;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.yes-no button:hover {
+  background: #ddd;
+}
+
+.yes-no button.selected {
+  background: #d4af37;
+  color: white;
+  border-color: #a7851f;
+  box-shadow: 0 2px 10px rgba(167, 133, 31, 0.6);
+}
+
+.error-message {
+  color: #d9534f;
+  font-size: 0.95em;
+  margin-top: 0.5em;
+  display: none;
+}
+
+.company-name {
+  margin: 2em auto 0 auto;
+  font-size: 0.9em;
+  color: #888;
+  font-weight: 500;
+  text-align: center;
+  user-select: none;
+  padding: 0.5em 0;
+  border-top: 1px solid #e0e0e0;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  font-family: 'Inter', 'Helvetica Neue', sans-serif;
+}
+
+.name-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2em;
+  margin-bottom: 0;
+}
+
+.name-inputs > div {
+  display: flex;
+  flex-direction: column;
+}
+
+#screen-1 {
+  justify-content: center;
+  text-align: center;
+}
+
+#screen-1 h2 {
+  font-size: 2em;
+  margin-bottom: 0.6em;
+  color: #222;
+}
+
+#screen-1 p {
+  font-size: 1em;
+  color: #555;
+  margin-bottom: 1.8em;
+  line-height: 1.4em;
+}
+
+#screen-review ul {
+  list-style: none;
+  padding-left: 0;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 1.5em;
+}
+
+#screen-review li {
+  margin-bottom: 0.8em;
+  font-size: 1em;
+  color: #222;
+  user-select: text;
+}
+
+#screen-review strong {
+  font-weight: 600;
+}
+
+.screen .nav-buttons {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.screen .nav-buttons button {
+  pointer-events: auto;
+}
+
+.screen .nav-buttons button.nav-back {
+  position: absolute;
+  left: -20px;
+}
+
+.screen .nav-buttons button.nav-next {
+  position: absolute;
+  right: -20px;
+}
+
+/* ===== Question Icons ===== */
+.question img {
+  width: 80px;          /* bigger icon */
+  height: 80px;         /* bigger icon */
+  display: block;
+  margin: 0 auto 0.5em auto;
+  object-fit: contain;
+}
+
+/* Small badge for error-code on review screen (optional small debug) */
+.review-error-code {
+  margin-left: 8px;
+  font-size: 0.9em;
+  color: #b00020;
+  font-weight: 600;
+}
+</style>
+</head>
+<body>
+  <div id="app">
+    <div class="progress-bar"><div class="progress" id="progress"></div></div>
+  </div>
+
+  <!-- jsPDF 2.x UMD -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  
+  <script src="https://unpkg.com/bwip-js/dist/bwip-js-min.js"></script>
+
+
+  <script>
+    (function () {
+      // --- Utilities for showing/clearing validation messages with error codes ---
+      const ERROR_CODES = {
+        // hardcoded personal info
+        firstname: '001-unanswered-firstname',
+        lastname:  '002-unanswered-lastname'
+        // other codes will be assigned automatically after questions load
+      };
+
+      function formatErrorMessage(message, code) {
+        return `${message} [${code}]`;
+      }
+
+      function showValidationErrorForContainer(containerEl, message, code) {
+        if (!containerEl) return;
+        containerEl.textContent = formatErrorMessage(message, code);
+        containerEl.style.display = 'block';
+        containerEl.setAttribute('data-error-code', code);
+      }
+
+      function clearValidationErrorForContainer(containerEl) {
+        if (!containerEl) return;
+        containerEl.textContent = '';
+        containerEl.style.display = 'none';
+        containerEl.removeAttribute('data-error-code');
+      }
+
+      function showValidationErrorOnField(fieldEl, message, code) {
+        // tries to find the closest .error-message container for the input's screen
+        if (!fieldEl) return;
+        const screen = fieldEl.closest('.screen');
+        const container = (screen && screen.querySelector('.error-message')) || document.getElementById('nameError') || null;
+        showValidationErrorForContainer(container, message, code);
+      }
+
+      function clearValidationErrorOnField(fieldEl) {
+        if (!fieldEl) return;
+        const screen = fieldEl.closest('.screen');
+        const container = (screen && screen.querySelector('.error-message')) || document.getElementById('nameError') || null;
+        clearValidationErrorForContainer(container);
+      }
+
+      // --- DOM setup (mostly unchanged) ---
+      const app = document.getElementById('app');
+
+      // Screen 0: Name input
+      const nameScreen = document.createElement('div');
+      nameScreen.className = 'screen active';
+      nameScreen.id = 'screen-0';
+      nameScreen.innerHTML = `
+        <label class="question">Please enter your full name<span class="required">*</span></label>
+        <div class="name-inputs">
+          <div>
+            <label for="firstName" style="font-weight: 500; font-size: 1.1em; color: #333;">First Name<span class="required">*</span></label>
+            <input type="text" id="firstName" required autocomplete="given-name" />
+          </div>
+          <div>
+            <label for="lastName" style="font-weight: 500; font-size: 1.1em; color: #333;">Last Name<span class="required">*</span></label>
+            <input type="text" id="lastName" required autocomplete="family-name" />
+          </div>
+        </div>
+        <p class="description">Please enter your full name so we can personalize your birth plan and PDF.</p>
+        <div class="error-message" id="nameError" style="display:none;"></div>
+        <div class="buttons" style="justify-content: flex-end; margin-top: 1.6em;">
+          <button id="toWelcomeBtn" class="circle-btn nav-next" aria-label="Next">→</button>
+        </div>
+        <div class="company-name">Modern Los Angeles Doula</div>
+      `;
+      app.appendChild(nameScreen);
+
+      // Screen 1: Welcome page (start button disabled until questions loaded)
+      const welcomeScreen = document.createElement('div');
+      welcomeScreen.className = 'screen';
+      welcomeScreen.id = 'screen-1';
+      welcomeScreen.innerHTML = `
+        <h2 id="welcomeGreeting">Welcome!</h2>
+        <p>Welcome to Modern Los Angeles Doula. This form will help you create a customized PDF birth plan. Click through each step.</p>
+        <div class="buttons" style="justify-content: center; margin-top: 2em;">
+          <button id="startBtn" disabled>Loading...</button>
+        </div>
+        <div class="company-name">Modern Los Angeles Doula</div>
+      `;
+      app.appendChild(welcomeScreen);
+
+      // createQuestionScreen function (unchanged structure but small fixes to closures)
+      function createQuestionScreen(q, index, total) {
+        const screen = document.createElement('div');
+        screen.className = 'screen';
+        screen.id = `screen-${index + 2}`;
+
+        const questionDiv = document.createElement('div');
+        questionDiv.className = 'question';
+
+        // Add icon if the question has one
+        if (q.icon) {
+          const icon = document.createElement('img');
+          icon.src = q.icon;
+          icon.alt = q.label + ' icon';
+          questionDiv.appendChild(icon);
+        }
+
+        // Create the title (label) and description for every question
+        const label = document.createElement('label');
+        label.htmlFor = q.id;
+        label.textContent = q.label;
+        if (q.required) {
+          const span = document.createElement('span');
+          span.className = 'required';
+          span.textContent = '*';
+          label.appendChild(span);
+        }
+        questionDiv.appendChild(label);
+
+        const desc = document.createElement('p');
+        desc.className = 'description';
+        desc.textContent = q.description || '';
+        questionDiv.appendChild(desc);
+
+        let input;
+        switch (q.type) {
+          case 'text':
+          case 'date':
+            input = document.createElement('input');
+            input.type = q.type;
+            input.id = q.id;
+            if (q.required) input.required = true;
+            questionDiv.appendChild(input);
+            break;
+          case 'select':
+            input = document.createElement('select');
+            input.id = q.id;
+            if (q.required) input.required = true;
+            const defaultOption = document.createElement('option');
+            defaultOption.value = '';
+            defaultOption.textContent = 'Select one...';
+            input.appendChild(defaultOption);
+            (q.options || []).forEach(opt => {
+              const option = document.createElement('option');
+              option.value = opt;
+              option.textContent = opt;
+              input.appendChild(option);
+            });
+            questionDiv.appendChild(input);
+            break;
+          case 'textarea':
+            input = document.createElement('textarea');
+            input.id = q.id;
+            input.rows = 5;
+            if (q.required) input.required = true;
+            questionDiv.appendChild(input);
+            break;
+          case 'yesno':
+            // Create container for the buttons
+            const yesNoDiv = document.createElement('div');
+            yesNoDiv.className = 'yes-no';
+
+            // Hidden input to store the answer
+            const hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.id = q.id;
+            if (q.required) hiddenInput.required = true;
+
+            // Create Yes and No buttons
+            ['Yes', 'No'].forEach(answer => {
+              const btn = document.createElement('button');
+              btn.type = 'button';
+              btn.textContent = answer;
+              btn.onclick = () => {
+                hiddenInput.value = answer;                         // store answer
+                yesNoDiv.querySelectorAll('button').forEach(b => b.classList.remove('selected')); // remove previous selection
+                btn.classList.add('selected');                      // highlight clicked button
+                // clear error when selecting
+                clearValidationErrorForContainer(screen.querySelector('.error-message'));
+              };
+              yesNoDiv.appendChild(btn);
+            });
+
+            questionDiv.appendChild(yesNoDiv);   // Add buttons to screen
+            questionDiv.appendChild(hiddenInput); // Add hidden input to screen
+            break;
+        }
+
+        screen.appendChild(questionDiv);
+
+        // Error message container for this question screen
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'error-message';
+        errorDiv.style.display = 'none';
+        errorDiv.id = `${q.id}-error`;
+        screen.appendChild(errorDiv);
+
+        const buttonsDiv = document.createElement('div');
+        buttonsDiv.className = 'nav-buttons'; // instead of just 'buttons'
+
+        // Circular Back button
+        const backBtn = document.createElement('button');
+        backBtn.className = 'circle-btn nav-back';
+        backBtn.innerHTML = '←';
+        backBtn.onclick = prevScreen;
+        buttonsDiv.appendChild(backBtn);
+
+        // Circular Next / Review button
+        const nextBtn = document.createElement('button');
+        nextBtn.className = 'circle-btn nav-next';
+        if (index === total - 1) {
+          nextBtn.classList.add('review'); // make it a bit wider for the word
+          nextBtn.textContent = 'Review';
+          nextBtn.onclick = () => showScreen(screens.length - 1);
+        } else {
+          nextBtn.innerHTML = '→';
+          nextBtn.onclick = nextScreen;
+        }
+        buttonsDiv.appendChild(nextBtn);
+
+        screen.appendChild(buttonsDiv);
+
+        const companyNameDiv = document.createElement('div');
+        companyNameDiv.className = 'company-name';
+        companyNameDiv.textContent = 'Modern Los Angeles Doula';
+        screen.appendChild(companyNameDiv);
+
+        app.appendChild(screen);
+      }
+
+      // Navigation & progress
+      let current = 0;
+      let screens = app.querySelectorAll('.screen');
+      const progressBar = document.getElementById('progress');
+
+      function updateProgress() {
+        if (current < 2) {
+          progressBar.style.width = '0%';
+          return;
+        }
+        const totalQuestions = (window.questions && window.questions.length) || 0;
+        const currentQuestionIndex = current - 2;
+        const percent = totalQuestions === 0 ? 0 : (currentQuestionIndex / totalQuestions) * 100;
+        progressBar.style.width = `${Math.max(0, Math.min(100, percent))}%`;
+      }
+
+      function showScreen(index) {
+        if (index < 0 || index >= screens.length) return;
+        screens.forEach(s => s.classList.remove('active'));
+        screens[index].classList.add('active');
+        current = index;
+        updateProgress();
+
+        // update nav button disabled state on the active screen
+        const active = screens[index];
+        if (active) {
+          const backNav = active.querySelector('.nav-back');
+          const nextNav = active.querySelector('.nav-next');
+
+          if (backNav) backNav.disabled = (index === 0);
+          if (nextNav) nextNav.disabled = (index === screens.length - 1);
+        }
+
+        if (screens[index].id === 'screen-review') {
+          populateReview();
+        }
+      }
+
+      // --- Validation logic with error codes ---
+      function validate(index) {
+        if (index === 0) {
+          // Validate name screen
+          const firstName = document.getElementById('firstName');
+          const lastName = document.getElementById('lastName');
+          let valid = true;
+
+          // Clear previous errors
+          clearValidationErrorForContainer(document.getElementById('nameError'));
+
+          if (!firstName.value.trim()) {
+            const code = ERROR_CODES.firstname || '001-unanswered-firstname';
+            showValidationErrorForContainer(document.getElementById('nameError'), 'Please enter your first name.', code);
+            firstName.focus();
+            valid = false;
+          } else if (!lastName.value.trim()) {
+            const code = ERROR_CODES.lastname || '002-unanswered-lastname';
+            showValidationErrorForContainer(document.getElementById('nameError'), 'Please enter your last name.', code);
+            lastName.focus();
+            valid = false;
+          } else {
+            clearValidationErrorForContainer(document.getElementById('nameError'));
+          }
+          return valid;
+        } else if (index > 1 && index < screens.length - 1) {
+          // Validate question screens (index corresponds to screen order)
+          const screen = screens[index];
+
+          // Reset error for this screen
+          const errorDiv = screen.querySelector('.error-message');
+          clearValidationErrorForContainer(errorDiv);
+
+          // Get all inputs/selects/textarea with required attribute (includes hidden yes/no hidden input)
+          const requiredFields = screen.querySelectorAll('input[required], select[required], textarea[required]');
+
+          let valid = true;
+          let message = '';
+          let code = '000-unanswered-unknown';
+          for (const field of requiredFields) {
+            if (field.type === 'hidden') {
+              // For yes/no questions (hidden input)
+              if (!field.value.trim()) {
+                message = 'Please answer the required question.';
+                code = (window.ERROR_CODES && window.ERROR_CODES[field.id]) || `100-unanswered-${field.id}`;
+                valid = false;
+                // focus the first visible yes/no button if available
+                const yesNoBtn = screen.querySelector('.yes-no button');
+                if (yesNoBtn) yesNoBtn.focus();
+                break;
+              }
+            } else if (field.tagName.toLowerCase() === 'select') {
+              if (!field.value.trim()) {
+                message = 'Please select an option for the required question.';
+                code = (window.ERROR_CODES && window.ERROR_CODES[field.id]) || `100-unanswered-${field.id}`;
+                field.focus();
+                valid = false;
+                break;
+              }
+            } else {
+              if (!field.value.trim()) {
+                message = 'Please fill out the required question.';
+                code = (window.ERROR_CODES && window.ERROR_CODES[field.id]) || `100-unanswered-${field.id}`;
+                field.focus();
+                valid = false;
+                break;
+              }
+            }
+          }
+
+          if (errorDiv) {
+            if (!valid) {
+              showValidationErrorForContainer(errorDiv, message, code);
+            } else {
+              clearValidationErrorForContainer(errorDiv);
+            }
+          } else if (!valid) {
+            // fallback (shouldn't normally happen) to alert if no error container exists
+            alert(message + ` [${code}]`);
+          }
+
+          return valid;
+        }
+        return true;
+      }
+
+      function nextScreen() {
+        if (!validate(current)) return;
+
+        if (current === screens.length - 2) {
+          showScreen(screens.length - 1);
+        } else if (current < screens.length - 1) {
+          showScreen(current + 1);
+        }
+      }
+
+      function prevScreen() {
+        if (current > 0) showScreen(current - 1);
+      }
+
+      // Review screen creation (done last!)
+      function createReviewScreen() {
+        const reviewScreen = document.createElement('div');
+        reviewScreen.className = 'screen';
+        reviewScreen.id = 'screen-review';
+        reviewScreen.innerHTML = `
+          <h2>Review Your Birth Plan</h2>
+          <ul id="review-list"></ul>
+          <div class="buttons">
+            <button id="reviewBackBtn">Back</button>
+            <button id="generatePdfBtn">Generate PDF</button>
+          </div>
+          <div class="company-name">Modern Los Angeles Doula</div>
+        `;
+        app.appendChild(reviewScreen);
+
+        document.getElementById('reviewBackBtn').addEventListener('click', () => {
+          showScreen(screens.length - 2);
+        });
+
+        document.getElementById('generatePdfBtn').addEventListener('click', generatePDF);
+      }
+
+      // Populate review list
+      function populateReview() {
+        const reviewList = document.getElementById('review-list');
+        reviewList.innerHTML = '';
+
+        const firstName = document.getElementById('firstName').value.trim();
+        const lastName = document.getElementById('lastName').value.trim();
+
+        const fullNameLi = document.createElement('li');
+        fullNameLi.innerHTML = `<strong>Full Name:</strong> ${firstName} ${lastName}`;
+        reviewList.appendChild(fullNameLi);
+
+        window.questions.forEach(q => {
+          const li = document.createElement('li');
+          let val = '';
+
+          const el = document.getElementById(q.id);
+          if (!el) return;
+
+          if (q.type === 'yesno') {
+            val = el.value || 'No response';
+          } else if (q.type === 'select') {
+            val = el.options[el.selectedIndex].value || 'No response';
+          } else {
+            val = el.value.trim() || 'No response';
+          }
+
+          // Check if there's an active error for this field: show code if present
+          const screenForQ = document.getElementById(`screen-${(window.questions.indexOf(q) + 2)}`);
+          let codeBadge = '';
+          if (screenForQ) {
+            const err = screenForQ.querySelector('.error-message');
+            if (err && err.getAttribute('data-error-code')) {
+              codeBadge = `<span class="review-error-code">[${err.getAttribute('data-error-code')}]</span>`;
+            }
+          }
+
+          li.innerHTML = `<strong>${q.label}</strong>: ${val} ${codeBadge}`;
+          reviewList.appendChild(li);
+        });
+      }
+
+        // --- PDF generation (advanced grid layout + metadata + headers/footers) ---
+// requires jsPDF loaded (UMD)
+const { jsPDF } = window.jspdf || window.jspdf || {};
+
+async function convertWixIconsToBase64(questions) {
+  const promises = questions.map(async (q) => {
+    if (q.icon && q.icon.startsWith('https://static.wixstatic.com/')) {
+      const response = await fetch(q.icon);
+      const blob = await response.blob();
+      const reader = new FileReader();
+      q.icon = await new Promise((resolve) => {
+        reader.onloadend = () => resolve(reader.result);
+        reader.readAsDataURL(blob);
+      });
+    }
+  });
+  await Promise.all(promises);
+}
+
+// --- CHANGE APPLIED: added async to function so await works correctly ---
+async function generatePDF() { // <-- CHANGED HERE
+  await convertWixIconsToBase64(window.questions);
+
+  // Validate required fields
+  if (!validateAll()) {
+    alert('Please complete all required fields before generating the PDF.');
+    return;
+  }
+
+  // Gather data
+  const firstName = document.getElementById('firstName').value.trim();
+  const lastName = document.getElementById('lastName').value.trim();
+
+  // Prepare questions array
+  const questions = window.questions || [];
+  const answers = {};
+  questions.forEach(q => {
+    const el = document.getElementById(q.id);
+    if (!el) return;
+    if (q.type === 'yesno') {
+      answers[q.id] = el.value || '';
+    } else if (q.type === 'select') {
+      answers[q.id] = el.options[el.selectedIndex]?.value || '';
+    } else {
+      answers[q.id] = el.value.trim() || '';
+    }
+  });
+
+  // --- Generate compact answer code ---
+  let answerCode = '';
+  questions.forEach((q, idx) => {
+    const el = document.getElementById(q.id);
+    if (!el) return;
+
+    let codePart = '';
+    if (q.type === 'yesno') {
+      codePart = el.value.trim().toLowerCase() === 'yes' ? '1' : '0';
+    } else if (q.type === 'select') {
+      codePart = String(el.selectedIndex); // index of selected option
+    } else {
+      // For text/textarea, simple hash
+      const text = el.value.trim();
+      let hash = 0;
+      for (let i = 0; i < text.length; i++) {
+        hash = ((hash << 5) - hash) + text.charCodeAt(i);
+        hash |= 0; // convert to 32bit int
+      }
+      hash = Math.abs(hash);
+      codePart = String(hash).slice(0, 2); // first 2 digits of hash
+    }
+
+    answerCode += codePart;
+  });
+
+  // Optional: Base64 encode to compress / obscure it
+  answerCode = btoa(answerCode);
+
+  // Create doc
+  const doc = new jsPDF({ unit: 'pt', format: 'letter' });
+  const pageWidth = doc.internal.pageSize.getWidth();
+  const pageHeight = doc.internal.pageSize.getHeight();
+  const margin = 40;
+  const contentWidth = pageWidth - margin * 2;
+  const contentHeight = pageHeight - margin * 2;
+
+  // Set metadata including URL & code
+  doc.setProperties({
+    title: `Birth Plan - ${firstName} ${lastName}`,
+    author: 'Modern LA Doula',
+    subject: 'Personalized Birth Plan',
+    keywords: `birth plan, doula, pregnancy, labor, ${firstName} ${lastName}, code:${answerCode}`,
+    creator: 'Modern LA Doula Form',
+    url: 'https://www.modernladoula.com/',
+    creationDate: new Date()
+  });
+
+  // Typography
+  const titleSize = 22;
+  const questionSize = 11;
+  const answerSize = 10;
+  const iconTargetSize = 48;
+
+  // Header + footer
+  function drawHeaderFooter(pageNum, totalPages) {
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(titleSize);
+    doc.text('Birth Plan', pageWidth / 2, margin - 10 + titleSize / 2, { align: 'center' });
+
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'normal');
+    const footerText = 'Modern LA Doula | https://www.modernladoula.com/';
+    doc.text(footerText, margin, pageHeight - margin + 20);
+
+    const pageText = `Page ${pageNum} of ${totalPages}`;
+    doc.text(pageText, pageWidth - margin, pageHeight - margin + 20, { align: 'right' });
+  }
+
+  // Grid constants
+  const gridRows = 6;
+  const gridCols = 6;
+  const cellWidth = contentWidth / gridCols;
+  const cellHeight = contentHeight / gridRows;
+
+  // Draw grid page
+  function drawGridPage(startIndex, pageNum, totalPages) {
+    let idx = startIndex;
+    const capacity = gridRows * gridCols;
+
+    for (let r = 0; r < gridRows; r++) {
+      for (let c = 0; c < gridCols; c++) {
+        const x = margin + c * cellWidth;
+        const y = margin + r * cellHeight;
+        const centerX = x + cellWidth / 2;
+
+        if (idx >= questions.length) continue;
+
+        const q = questions[idx];
+        const answer = answers[q.id] || '';
+
+        // Icon
+        const iconY = y + 12;
+        const iconSize = iconTargetSize;
+        if (q.icon) {
+          try {
+            const dataUrl = q.icon;
+            const format = dataUrl.indexOf('image/png') !== -1 ? 'PNG' : 'JPEG';
+            doc.addImage(dataUrl, format, centerX - iconSize / 2, iconY, iconSize, iconSize);
+          } catch (e) {
+            doc.setDrawColor(180);
+            doc.circle(centerX, iconY + iconSize / 2, iconSize / 2, 'S');
+          }
+        }
+
+        // Text
+        const textTop = iconY + iconSize + 6;
+        const textBoxHeight = y + cellHeight - textTop - 8;
+        const textBoxWidth = cellWidth - 12;
+
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(questionSize);
+        const questionText = `${q.label}:`;
+        const questionLines = doc.splitTextToSize(questionText, textBoxWidth);
+
+        doc.setFont('helvetica', 'italic');
+        doc.setFontSize(answerSize);
+        const answerLines = doc.splitTextToSize(answer || '—', textBoxWidth);
+
+        const qLineHeight = questionSize * 1.15;
+        const aLineHeight = answerSize * 1.15;
+        const totalTextHeight = questionLines.length * qLineHeight + answerLines.length * aLineHeight;
+        const startY = textTop + Math.max(0, (textBoxHeight - totalTextHeight) / 2) + questionSize;
+
+        questionLines.forEach((line, i) => {
+          doc.text(line, centerX, startY + i * qLineHeight, { align: 'center' });
+        });
+        const answerStartY = startY + questionLines.length * qLineHeight;
+        answerLines.forEach((line, i) => {
+          doc.text(line, centerX, answerStartY + i * aLineHeight, { align: 'center' });
+        });
+
+        idx++;
+      }
+    }
+
+    drawHeaderFooter(pageNum, totalPages);
+    return Math.min(questions.length, startIndex + capacity);
+  }
+
+  // Add pages
+  const totalPages = 2;
+  let currentIndex = 0;
+
+  // Page 1
+  drawGridPage(currentIndex, 1, totalPages);
+  currentIndex += gridRows * gridCols;
+
+  // Page 2
+  doc.addPage();
+  drawGridPage(currentIndex, 2, totalPages);
+
+  try {
+    // bwipjs should be lowercase (from your CDN)
+    const canvas = document.createElement('canvas');
+    bwipjs.toCanvas(canvas, {
+        bcid: 'datamatrix',    // barcode type
+        text: answerCode,       // the compact answer string
+        scale: 3,               // pixels per module
+        padding: 5              // add a small padding so it doesn't clip
+    });
+
+    // Position at bottom-left corner of last page
+    const codeX = margin;
+    const codeY = pageHeight - margin - 60; // 60pt height
+    const codeSize = 60;
+
+    const dataUrl = canvas.toDataURL('image/png');
+    doc.addImage(dataUrl, 'PNG', codeX, codeY, codeSize, codeSize);
+
+  } catch (e) {
+    console.error('Data Matrix generation failed', e);
+  }
+
+  // --- MOBILE-FRIENDLY SAVE ---
+  const safeFirst = firstName || 'Unknown';
+  const safeLast = lastName || '';
+  const pdfFileName = `BirthPlan_${safeFirst}_${safeLast}.pdf`;
+
+  if (/Mobi|Android/i.test(navigator.userAgent)) {
+    // Mobile workaround
+    const pdfBlob = doc.output('blob');
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(pdfBlob);
+    link.download = pdfFileName;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  } else {
+    doc.save(pdfFileName);
+  }
+}
+
+
+function validateAll() {
+  if (!validate(0)) return false;
+  for (let i = 2; i < screens.length - 1; i++) {
+    if (!validate(i)) return false;
+  }
+  return true;
+}
+
+// Button listeners
+document.getElementById('toWelcomeBtn').addEventListener('click', () => {
+  if (validate(0)) {
+    const firstName = document.getElementById('firstName').value.trim();
+    document.getElementById('welcomeGreeting').textContent = `Welcome, ${firstName || ''}!`;
+    showScreen(1);
+  }
+});
+
+document.getElementById('startBtn').addEventListener('click', () => {
+  showScreen(2);
+});
+
+const questionsUrl = 'https://gist.githubusercontent.com/EddieTheDog/7a45769f81114969d6dc201e1f639fbb/raw/gistfile1.txt';
+
+async function loadQuestionsAndInit() {
+  try {
+    const response = await fetch(questionsUrl);
+    if (!response.ok) throw new Error('Network response was not ok');
+
+    const text = await response.text();
+    const questionsFromGist = JSON.parse(text);
+
+    window.questions = questionsFromGist;
+
+    let autoNum = 100;
+    window.ERROR_CODES = Object.assign({}, ERROR_CODES);
+    questionsFromGist.forEach(q => {
+      const safeId = q.id || (`q${autoNum}`);
+      if (!window.ERROR_CODES[safeId]) {
+        const code = `${String(autoNum).padStart(3, '0')}-unanswered-${safeId}`;
+        window.ERROR_CODES[safeId] = code;
+        autoNum++;
+      }
+    });
+
+    const oldScreens = Array.from(document.querySelectorAll('.screen')).filter(s => s.id.startsWith('screen-') && !['screen-0','screen-1'].includes(s.id));
+    oldScreens.forEach(s => s.remove());
+
+    questionsFromGist.forEach((q, i) => createQuestionScreen(q, i, questionsFromGist.length));
+    createReviewScreen();
+
+    screens = app.querySelectorAll('.screen');
+
+    const startBtn = document.getElementById('startBtn');
+    startBtn.disabled = false;
+    startBtn.textContent = 'Start';
+    showScreen(0);
+
+  } catch (error) {
+    console.error('Failed to load questions:', error);
+    alert('Failed to load questions from server.');
+  }
+}
+
+loadQuestionsAndInit();
+
+window.showValidationErrorForContainer = showValidationErrorForContainer;
+window.clearValidationErrorForContainer = clearValidationErrorForContainer;
+})();
+</script>
+</body>
+</html>
