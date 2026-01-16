@@ -1,0 +1,460 @@
+[
+{
+    "label": "Does This Work",
+    "required": false,
+    "type": "select",
+    "id": "dosethiswork",
+    "description": "Choose the option that best matches your experience.",
+    "icon": "https://static.wixstatic.com/media/4510e9_267481400a754894b9b2fe3c12212464~mv2.png",
+    "options": [
+        "Absolutely, no doubt about it",
+        "It works pretty well",
+        "Somewhat, but could be better",
+        "Not really",
+        "No, not at all"
+       ]
+    },
+    {
+        "label": "Ask For My Consent",
+        "required": true,
+        "type": "yesno",
+        "id": "askformyconsent",
+        "description": "Would you like to be asked for your consent before any procedure?",
+        "icon": "https://static.wixstatic.com/media/4510e9_33e7231b191148778a168f43364ab6a8~mv2.png"
+    },
+    {
+        "label": "Gentle Cesarean If Necessary",
+        "required": true,
+        "type": "yesno",
+        "id": "gentlecesareanifnecessary",
+        "description": "Do you prefer a gentle cesarean section approach if surgery is needed?",
+        "icon": "https://static.wixstatic.com/media/4510e9_021203dc493e40ce95dea1762050fbb5~mv2.png"
+    },
+    {
+        "label": "Survivor of Abuse",
+        "required": true,
+        "type": "yesno",
+        "id": "survivorofabuse",
+        "description": "Have you survived abuse and would you like your care providers to be aware?",
+        "icon": "https://static.wixstatic.com/media/4510e9_d6f380eff0c24e4e997871da94c33624~mv2.png"
+
+    },
+    {
+        "label": "VBAC",
+        "required": true,
+        "type": "yesno",
+        "id": "vbac",
+        "description": "Are you planning a Vaginal Birth After Cesarean (VBAC)?",
+        "icon": "https://static.wixstatic.com/media/4510e9_9d56814a4f3342989989fbb02fa05753~mv2.png"
+
+    },
+    {
+        "label": "Intermittent/Wireless Monitoring",
+        "required": true,
+        "type": "yesno",
+        "id": "intermittentwirelessmonitoring",
+        "description": "Do you want intermittent or wireless fetal monitoring during labor?",
+        "icon": "https://static.wixstatic.com/media/4510e9_550cb427fba043babf650628ba537a5a~mv2.png"
+
+    },
+    {
+        "label": "Lights Dim",
+        "required": true,
+        "type": "yesno",
+        "id": "lightsdim",
+        "description": "Would you prefer the lights to be dimmed during labor?",
+        "icon": "https://static.wixstatic.com/media/4510e9_3aaa5533bba84f14b9838006dcd97f74~mv2.png"
+    },
+    {
+        "label": "Free Movement",
+        "required": true,
+        "type": "yesno",
+        "id": "freemovement",
+        "description": "Would you like to have freedom of movement during labor?",
+        "icon": "https://static.wixstatic.com/media/4510e9_1e7a553bd8254499bf4904a49b42346f~mv2.png"
+    },
+    {
+        "label": "Food and Drink",
+        "required": true,
+        "type": "yesno",
+        "id": "foodanddrink",
+        "description": "Do you want to be allowed food and drink during labor?",
+        "icon": "https://static.wixstatic.com/media/4510e9_8a1cc628564643e0be2f08c3a71c2a26~mv2.png"
+    },
+    {
+        "label": "Limited Visitors",
+        "required": true,
+        "type": "yesno",
+        "id": "limitedvisitors",
+        "description": "Would you like to limit the number of visitors during labor and delivery?",
+        "icon": "https://static.wixstatic.com/media/4510e9_ab6e613a8f1c4bd99ec696b92df5dc20~mv2.png"
+    },
+    {
+        "label": "Labor In Water",
+        "required": true,
+        "type": "yesno",
+        "id": "laborinwater",
+        "description": "Are you interested in laboring in water (such as a birthing tub)?",
+        "icon": "https://static.wixstatic.com/media/4510e9_2d93cbdb66b148f5adc45f95eede4067~mv2.png"
+    },
+    {
+        "label": "Hypnobirthing",
+        "required": true,
+        "type": "yesno",
+        "id": "hypnobirthing",
+        "description": "Would you like to use hypnobirthing techniques during labor?",
+        "icon": "https://static.wixstatic.com/media/4510e9_11305f49875f415bae93ef54e90be1dd~mv2.png"
+    },
+    {
+        "label": "Do Not Offer Pain Meds",
+        "required": true,
+        "type": "yesno",
+        "id": "donotofferpainmeds",
+        "description": "Do you prefer not to be offered pain medications during labor?",
+        "icon": "https://static.wixstatic.com/media/4510e9_b88fb0598e2a4ac0877c38cbb33f7197~mv2.png"
+    },
+    {
+        "label": "Limited Cervical Exams",
+        "required": true,
+        "type": "yesno",
+        "id": "limitedcervicalexams",
+        "description": "Would you like to limit the number of cervical exams during labor?",
+        "icon": "https://static.wixstatic.com/media/4510e9_b33c98f2fee04aaa96e2ed98bb990e2c~mv2.png"
+    },
+    {
+        "label": "Natural Water Rupture",
+        "required": true,
+        "type": "yesno",
+        "id": "naturalwaterrupture",
+        "description": "Do you prefer your water to break naturally rather than being artificially ruptured?",
+        "icon": "https://static.wixstatic.com/media/4510e9_9686bf6eb8fd48b9a007e9c03b017759~mv2.png"
+    },
+    {
+        "label": "No Students Please",
+        "required": true,
+        "type": "yesno",
+        "id": "nostudentsplease",
+        "description": "Do you prefer that no students be present during your care?",
+        "icon": "https://static.wixstatic.com/media/4510e9_bad7fbdbe30c475f987be5b4897c77f5~mv2.png"
+    },
+    {
+        "label": "No IV",
+        "required": true,
+        "type": "yesno",
+        "id": "noiv",
+        "description": "Do you prefer not to have an intravenous (IV) line placed?",
+        "icon": "https://static.wixstatic.com/media/4510e9_eed68c5f4ed6423d937e1cc973f3c8d5~mv2.png"
+    },
+    {
+        "label": "HEP / Saline Lock",
+        "required": true,
+        "type": "yesno",
+        "id": "hepsalinelock",
+        "description": "Would you like a saline lock instead of a full IV?",
+        "icon": "https://static.wixstatic.com/media/4510e9_bf593a3f27694b5384931e52b1559830~mv2.png"
+    },
+    {
+        "label": "Pitocin Only If Necessary",
+        "required": true,
+        "type": "yesno",
+        "id": "pitocinonlyifnecessary",
+        "description": "Should Pitocin be used only if medically necessary?",
+        "icon": "https://static.wixstatic.com/media/4510e9_eb82da5255204e9dbcac39909415117f~mv2.png"
+    },
+    {
+        "label": "No Epidural",
+        "required": true,
+        "type": "yesno",
+        "id": "noepidural",
+        "description": "Do you prefer not to receive an epidural for pain relief?",
+        "icon": "https://static.wixstatic.com/media/4510e9_9ad13ddb667c4d0d9e8528a6b1d96417~mv2.png"
+    },
+    {
+        "label": "Walking Epidural",
+        "required": true,
+        "type": "yesno",
+        "id": "walkingepidural",
+        "description": "Would you like to have a walking epidural if an epidural is used?",
+        "icon": "https://static.wixstatic.com/media/4510e9_819a1c93770c45fea0d08dd02064062e~mv2.png"
+    },
+    {
+        "label": "Talk Me Through What Is Happening",
+        "required": true,
+        "type": "yesno",
+        "id": "talkmethroughwhatishappening",
+        "description": "Would you like the care team to explain what is happening during labor and delivery?",
+        "icon": "https://static.wixstatic.com/media/4510e9_cb438ca2a1b0462885ea0d7edff9cd09~mv2.png"
+    },
+    {
+        "label": "No Episiotomy",
+        "required": true,
+        "type": "yesno",
+        "id": "noepisiotomy",
+        "description": "Do you want to avoid having an episiotomy (surgical cut) during delivery?",
+        "icon": "https://static.wixstatic.com/media/4510e9_fe296fa769014199854f25af11ed5083~mv2.png"
+    },
+    {
+        "label": "No Vacuum or Forceps",
+        "required": true,
+        "type": "yesno",
+        "id": "novacuumorforceps",
+        "description": "Do you prefer not to have vacuum or forceps-assisted delivery?",
+        "icon": "https://static.wixstatic.com/media/4510e9_9aac3658ad0447f7a008b109aadc0443~mv2.png"
+    },
+    {
+        "label": "Alternative Pushing Positions",
+        "required": true,
+        "type": "yesno",
+        "id": "alternativepushingpositions",
+        "description": "Would you like to use alternative positions for pushing during delivery?",
+        "icon": "https://static.wixstatic.com/media/4510e9_5f425316cf8a42da99bc77790d7fdcf1~mv2.png"
+    },
+    {
+        "label": "Mom or Partner Catch Baby",
+        "required": true,
+        "type": "yesno",
+        "id": "momorpartnercatchbaby",
+        "description": "Would you or your partner like to catch the baby?",
+        "icon": "https://static.wixstatic.com/media/4510e9_50be46d2576542a8b85c1cc028eef063~mv2.png"
+    },
+    {
+        "label": "Partner Does Want to Cut Cord",
+        "required": true,
+        "type": "yesno",
+        "id": "partnerdoeswanttocutcord",
+        "description": "Does your partner want to cut the umbilical cord?",
+        "icon": "https://static.wixstatic.com/media/4510e9_267481400a754894b9b2fe3c12212464~mv2.png"
+    },
+    {
+        "label": "Partner Does Not Want to Cut Cord",
+        "required": true,
+        "type": "yesno",
+        "id": "partnerdoesnotwanttocutcord",
+        "description": "Does your partner prefer not to cut the umbilical cord?",
+        "icon": "https://static.wixstatic.com/media/4510e9_4cd9958d5d9c4f56878b59c87962dc79~mv2.png"
+    },
+    {
+        "label": "Offer Mom to Cut Cord",
+        "required": true,
+        "type": "yesno",
+        "id": "offermomtocutcord",
+        "description": "Would you like mom to be offered the chance to cut the cord?",
+        "icon": "https://static.wixstatic.com/media/4510e9_dc85351283954c3bad1b7420bf35116d~mv2.png"
+    },
+    {
+        "label": "Cord Blood Banking",
+        "required": true,
+        "type": "yesno",
+        "id": "cordbloodbanking",
+        "description": "Are you interested in banking your baby’s cord blood?",
+        "icon": "https://static.wixstatic.com/media/4510e9_07671e9856fd469e858354297a02dc3a~mv2.png"
+    },
+    {
+        "label": "Cord Blood Donating",
+        "required": true,
+        "type": "yesno",
+        "id": "cordblooddonating",
+        "description": "Would you like to donate your baby’s cord blood?",
+        "icon": "https://static.wixstatic.com/media/4510e9_07671e9856fd469e858354297a02dc3a~mv2.png"
+    },
+    {
+        "label": "No Traction On Placenta",
+        "required": true,
+        "type": "yesno",
+        "id": "notractiononplacenta",
+        "description": "Do you prefer no traction to be applied to deliver the placenta?",
+        "icon": "https://static.wixstatic.com/media/4510e9_07b081f29e094c8eb21788ae01587cbe~mv2.png"
+    },
+    {
+        "label": "No Active Management of 3rd Stage",
+        "required": true,
+        "type": "yesno",
+        "id": "noactivemanagementof3rdstage",
+        "description": "Do you prefer to avoid active management during the third stage of labor?",
+        "icon": "https://static.wixstatic.com/media/4510e9_7b48b8c0e2a54a81823f4298cc6258d2~mv2.png"
+    },
+    {
+        "label": "Show Placenta",
+        "required": true,
+        "type": "yesno",
+        "id": "showplacenta",
+        "description": "Would you like to see the placenta after birth?",
+        "icon": "https://static.wixstatic.com/media/4510e9_8b98260fb68747c09194a6475dd8d808~mv2.png"
+    },
+    {
+        "label": "Save The Placenta",
+        "required": true,
+        "type": "yesno",
+        "id": "savetheplacenta",
+        "description": "Would you like to keep or save the placenta after birth?",
+        "icon": "https://static.wixstatic.com/media/4510e9_937da10850e84e2296d0431da032f9f6~mv2.png"
+    },
+    {
+        "label": "Immediate Skin to Skin",
+        "required": true,
+        "type": "yesno",
+        "id": "immediateskintoskin",
+        "description": "Do you want immediate skin-to-skin contact after birth?",
+        "icon": "https://static.wixstatic.com/media/4510e9_efd11dbfadac4cc28d4fa86059128515~mv2.png"
+    },
+    {
+        "label": "Labor Down",
+        "required": true,
+        "type": "yesno",
+        "id": "labordown",
+        "description": "Would you like to labor down (delay pushing) when fully dilated?",
+        "icon": "https://static.wixstatic.com/media/4510e9_267481400a754894b9b2fe3c12212464~mv2.png"
+    },
+    {
+        "label": "Warm Compress",
+        "required": true,
+        "type": "yesno",
+        "id": "warmcompress",
+        "description": "Would you like warm compresses applied during delivery?",
+        "icon": "https://static.wixstatic.com/media/4510e9_f5bea459231141bc9e965862514cb3a7~mv2.png"
+    },
+    {
+        "label": "Perineal Massage",
+        "required": true,
+        "type": "yesno",
+        "id": "perinealmassage",
+        "description": "Would you like perineal massage to reduce tearing?",
+        "icon": "https://static.wixstatic.com/media/4510e9_55189fc9ae9e4a87a8a8dfc2e4bbbd68~mv2.png"
+    },
+    {
+        "label": "Mineral Oil",
+        "required": true,
+        "type": "yesno",
+        "id": "mineraloil",
+        "description": "Would you like mineral oil used during delivery for comfort?",
+        "icon": "https://static.wixstatic.com/media/4510e9_267481400a754894b9b2fe3c12212464~mv2.png"
+    },
+    {
+        "label": "Do Not Wash or Wipe Baby",
+        "required": true,
+        "type": "yesno",
+        "id": "donotwashorwipebaby",
+        "description": "Do you prefer your baby not be washed or wiped immediately after birth?",
+        "icon": "https://static.wixstatic.com/media/4510e9_976f0ef94c3e4f0a81c4a8bb36ffa6de~mv2.png"
+    },
+    {
+        "label": "Calm Golden Hour",
+        "required": true,
+        "type": "yesno",
+        "id": "calmgoldenhour",
+        "description": "Would you like a calm and quiet environment during the first hour after birth?",
+        "icon": "https://static.wixstatic.com/media/4510e9_fdb8e99041cb49bc9b1598e7c40a9813~mv2.png"
+    },
+    {
+        "label": "Delay Exams for Bonding",
+        "required": true,
+        "type": "yesno",
+        "id": "delayexamsforbonding",
+        "description": "Do you prefer to delay newborn exams to allow uninterrupted bonding?",
+        "icon": "https://static.wixstatic.com/media/4510e9_4c11ee189a2c41e4b3debb8270127dca~mv2.png"
+    },
+    {
+        "label": "Breastfeeding ASAP",
+        "required": true,
+        "type": "yesno",
+        "id": "breastfeedingasap",
+        "description": "Would you like to begin breastfeeding as soon as possible after birth?",
+        "icon": "https://static.wixstatic.com/media/4510e9_1ac67c1e804f4e258b43e4e3888ca5bd~mv2.png"
+    },
+    {
+        "label": "Eye Ointment",
+        "required": true,
+        "type": "yesno",
+        "id": "eyeointment",
+        "description": "Do you prefer not to have eye ointment applied to your newborn?",
+        "icon": "https://static.wixstatic.com/media/4510e9_2439c4693ea4437fb056214971ac1d2e~mv2.png"
+    },
+    {
+        "label": "Delay Eye Ointment",
+        "required": true,
+        "type": "yesno",
+        "id": "delayeyeointment",
+        "description": "Would you prefer to delay the application of eye ointment to your newborn?",
+        "icon": "https://static.wixstatic.com/media/4510e9_267481400a754894b9b2fe3c12212464~mv2.png"
+    },
+    {
+        "label": "Hepatitis B",
+        "required": true,
+        "type": "yesno",
+        "id": "hepatitisb",
+        "description": "Do you accept or decline the Hepatitis B vaccine for your newborn?",
+        "icon": "https://static.wixstatic.com/media/4510e9_e040a56b387e45349cac11b144547b0c~mv2.png"
+    },
+    {
+        "label": "Vitamin K",
+        "required": true,
+        "type": "yesno",
+        "id": "novitamink",
+        "description": "Do you consent to the Vitamin K injection for your newborn?",
+        "icon": "https://static.wixstatic.com/media/4510e9_83f8d4b0d60540eeaf1fb5a03500ca77~mv2.png"
+    },
+    {
+        "label": "Delayed Cord Clamping",
+        "required": true,
+        "type": "yesno",
+        "id": "delayedcordclamping",
+        "description": "Would you like delayed clamping of the umbilical cord?",
+        "icon": "https://static.wixstatic.com/media/4510e9_3a1dde89a7c64ff1bf261f10eff8da66~mv2.png"
+    },
+    {
+        "label": "No Circumcision",
+        "required": true,
+        "type": "yesno",
+        "id": "nocircumcision",
+        "description": "Do you choose not to have your baby circumcised?",
+        "icon": "https://static.wixstatic.com/media/4510e9_5b2d8b0e673b42b1a894533819ff8fa8~mv2.png"
+    },
+    {
+        "label": "No Formula",
+        "required": true,
+        "type": "yesno",
+        "id": "noformula",
+        "description": "Do you prefer to avoid formula feeding your baby?",
+        "icon": "https://static.wixstatic.com/media/4510e9_33bad4ea4391471a8b03c44c27bf598a~mv2.png"
+    },
+    {
+        "label": "No Pacifiers",
+        "required": true,
+        "type": "yesno",
+        "id": "nopacifiers",
+        "description": "Do you prefer your baby not to use pacifiers?",
+        "icon": "https://static.wixstatic.com/media/4510e9_82dc2a177f1c4e9692532128ede14d38~mv2.png"
+    },
+    {
+        "label": "Custom Visitor List",
+        "required": true,
+        "type": "text",
+        "id": "customvisitorlist",
+        "description": "List any specific visitors you want allowed or not allowed.",
+        "icon": "https://static.wixstatic.com/media/4510e9_ab6e613a8f1c4bd99ec696b92df5dc20~mv2.png"
+    },
+    {
+        "label": "Partner’s Name (if cutting cord)",
+        "required": true,
+        "type": "text",
+        "id": "partnersnameifcuttingcord",
+        "description": "Provide your partner’s name if they will be cutting the umbilical cord.",
+        "icon": "https://static.wixstatic.com/media/4510e9_7a238dbcc78f41c4b8072d8856f7db09~mv2.png"
+    },
+    {
+        "label": "Placenta Plans",
+        "required": true,
+        "type": "text",
+        "id": "placentaplans",
+        "description": "Describe any plans you have for your placenta after birth.",
+        "icon": "https://static.wixstatic.com/media/4510e9_8b98260fb68747c09194a6475dd8d808~mv2.png"
+    },
+    {
+        "label": "Additional Notes",
+        "required": false,
+        "type": "text",
+        "id": "additionalnotes",
+        "description": "Do You Have any Additional Notes if you do you can now.",
+        "icon": "https://static.wixstatic.com/media/4510e9_5c1d11f8725948449141a99f2446226f~mv2.png"
+    }
+]
